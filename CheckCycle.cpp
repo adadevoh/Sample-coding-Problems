@@ -138,23 +138,6 @@ int main()
 	checkForDuplicates(myList2.head);
 	
 
-
-
-	/*int i = 0;
-
-
-	Node* current = myList.head;
-	while(i< 8)
-	{
-		
-		cout<<current->data;
-		current = current->next;
-		i++;
-	}*/
-
-	//myList.view();
-	//cout<<"my tail "<<myList.tail->data<<endl;
-	//cout<<"my head "<<myList.head->data<<endl;
 	system("pause");
 	return 0;
 }
