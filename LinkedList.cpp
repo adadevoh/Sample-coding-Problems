@@ -31,7 +31,6 @@ public:
 	bool isEmpty();
 	void add(int data);
 	void view();//view the list
-	bool removeDuplicates(Node* node)//remove duplicates using a hash map O(n) time
 	void removeDup(Node*);// Remove duplicates from a linked list O(n^2). Can be remade using hash map, then it becomes O(n)
 	void kthToLast(int);// get the kth to last element (iterative)
 	int nthToLast(Node*, int);// get the nth to last element (recursive)
@@ -137,39 +136,6 @@ void List::removeDup(Node* start)// Interview Question 2.1
 	}
 }
 
-bool List::removeDuplicates(Node* node){
-	if (node == nullptr)
-		return false;
-
-	map<int, bool>hash;
-	Node* runner1 = node;//starts a first element
-	Node* runner2 = node->getNext();//start at second element
-	Node* temp;
-	hash[runner1->getData()] = true;
-	while (runner2 != nullptr){
-		cout <<"runner1 data: "<< runner1->getData()<< " runner2 data: " << runner2->getData()<<endl;
-		if (hash[runner2->getData()] == false){
-			hash[runner2->getData()] = true;
-		}
-		else{// duplicate found
-			temp = runner2;
-			runner1->setNextNode(runner2->getNext());//set runner2 to point to node after runner1(i.e runner1->next)
-			runner2 = runner2->getNext();//update nunner1 to next node
-			delete temp;
-		}
-		//gotta check if runner 2 is null, because it could have found a dupplicate at the end of the node and been assigned
-		//to null already
-		if (runner2 != nullptr){
-			runner2 = runner2->getNext();
-		}
-		runner1 = runner1->getNext();
-
-	}
-	cout << "removed duplicates" << endl;
-	return true;
-}
-
-
 void List::kthToLast(int k)
 {
 	int size = 1;
@@ -257,6 +223,39 @@ List List::sumLists(List num1, List num2)// only works for if the lists are in r
 
 
 	return newList;
+}
+
+//remove duplicates using a hash map O(n) time
+bool removeDuplicates(Node* node){
+	if (node == nullptr)
+		return false;
+
+	map<int, bool>hash;
+	Node* runner1 = node;//starts a first element
+	Node* runner2 = node->getNext();//start at second element
+	Node* temp;
+	hash[runner1->getData()] = true;
+	while (runner2 != nullptr){
+		cout <<"runner1 data: "<< runner1->getData()<< " runner2 data: " << runner2->getData()<<endl;
+		if (hash[runner2->getData()] == false){
+			hash[runner2->getData()] = true;
+		}
+		else{// duplicate found
+			temp = runner2;
+			runner1->setNextNode(runner2->getNext());//set runner2 to point to node after runner1(i.e runner1->next)
+			runner2 = runner2->getNext();//update nunner1 to next node
+			delete temp;
+		}
+		//gotta check if runner 2 is null, because it could have found a dupplicate at the end of the node and been assigned
+		//to null already
+		if (runner2 != nullptr){
+			runner2 = runner2->getNext();
+		}
+		runner1 = runner1->getNext();
+
+	}
+	cout << "removed duplicates" << endl;
+	return true;
 }
 int main()
 {
